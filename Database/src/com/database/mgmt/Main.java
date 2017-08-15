@@ -12,7 +12,7 @@ public class Main {
      */
     public static void main(String[] args) {
         SQLiteDB db = new SQLiteDB();
-//        db.insertProduct("Lipstick", 13, 8, "resources/lipstick.jpg", 100, 6.99);
+        db.insertProduct("!@#ghJ#$poui1", "Perfume", 42, 1, "resources/perfume.jpg", 666, 21.99);
 //        db.readImage(2, "lipstick_from_db.jpg");
     }
     

@@ -29,7 +29,7 @@ public class SQLiteDB {
         Connection connection = null;
 
         // SQLite connection string
-        String url = "jdbc:sqlite:ScaneristDB.db";
+        String url = "jdbc:sqlite:ScaneristDB_v2.db";
         try {
             // Create a connection to the database
             connection = DriverManager.getConnection(url);
@@ -127,20 +127,23 @@ public class SQLiteDB {
      * @param billOfMaterialsId
      * @param price
      */
-    public void insertProduct(String name, int productType, int amount,
+    public void insertProduct(String barcode, String name, int productType, int amount,
             String image, int billOfMaterialsId, double price) {
-        String sql = "INSERT INTO Product (name, product_type, amount, "
-                + "image, datetime_modified, Bill_Of_Materialsid, price) VALUES (?, ?, ?, ?, datetime('now'), ?, ?)";
+        String sql = "INSERT INTO Product (barcode, name, product_type, amount, "
+                + "image, datetime_modified, Bill_Of_Materialsid, "
+                + "price) VALUES (?, ?, ?, ?, ?, datetime('now'), ?, ?)";
+        
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // Set the values
-            pstmt.setString(1, name);
-            pstmt.setInt(2, productType);
-            pstmt.setInt(3, amount);
-            pstmt.setBytes(4, readFile(image));
-            pstmt.setInt(5, billOfMaterialsId);
-            pstmt.setDouble(6, price);
+            pstmt.setString(1, barcode);
+            pstmt.setString(2, name);
+            pstmt.setInt(3, productType);
+            pstmt.setInt(4, amount);
+            pstmt.setBytes(5, readFile(image));
+            pstmt.setInt(6, billOfMaterialsId);
+            pstmt.setDouble(7, price);
 
             // Execute query
             pstmt.executeUpdate();
