@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS Clerk;
 DROP TABLE IF EXISTS ProductTransaction;
 CREATE TABLE Product (
   product_id          INTEGER NOT NULL PRIMARY KEY, 
-  barcode             char(13) NOT NULL,
+  barcode             varchar(13) NOT NULL,
   name                varchar(100) NOT NULL, 
   product_type        integer(10), 
   amount              integer(10) NOT NULL, 
