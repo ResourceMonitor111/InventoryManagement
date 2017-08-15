@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: 
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="Bill_Of_Materials" table="Bill_Of_Materials" lazy="false">
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="amount_arrived" column="amount_arrived" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="datetime_added" column="datetime_added" type="timestamp" not-null="true" lazy="false"/>
+		<property name="delivered_by" column="delivered_by" type="string" length="255" not-null="true" lazy="false"/>
+		<property name="contact_number" column="contact_number" type="integer" length="20" not-null="true" lazy="false"/>
+		<many-to-one name="productproduct" cascade="lock" column="Productproduct_id" class="Product" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+	</class>
+</hibernate-mapping>

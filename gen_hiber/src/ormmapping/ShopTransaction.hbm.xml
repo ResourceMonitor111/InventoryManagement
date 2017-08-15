@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: 
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="ShopTransaction" table="ShopTransaction" lazy="false">
+		<id name="_transaction_id" column="_transaction_id" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="datetime_created" column="datetime_created" type="timestamp" not-null="true" lazy="false"/>
+		<many-to-one name="clerkClerk" cascade="lock" column="ClerkClerk_id" class="Clerk" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<set name="ORM_ProductTransaction" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="Transaction_transaction_id" not-null="true"/>
+			<one-to-many class="ProductTransaction"/>
+		</set>
+	</class>
+</hibernate-mapping>

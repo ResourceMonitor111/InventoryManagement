@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: 
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="Product" table="Product" lazy="false">
+		<id name="product_id" column="product_id" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="name" column="name" type="string" length="100" not-null="true" lazy="false"/>
+		<property name="product_type" column="product_type" type="integer" length="10" not-null="false" lazy="false"/>
+		<property name="amount" column="amount" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="image" column="image" type="blob" not-null="false" lazy="false"/>
+		<property name="datetime_modified" column="datetime_modified" type="timestamp" not-null="true" lazy="false"/>
+		<property name="bill_Of_Materialsid" column="Bill_Of_Materialsid" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="price" column="price" type="big_decimal" precision="7" scale="2" not-null="false" lazy="false"/>
+		<set name="ORM_ProductTransaction" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="Productproduct_id" not-null="true"/>
+			<one-to-many class="ProductTransaction"/>
+		</set>
+		<set name="ORM_Bill_Of_Materials" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="Productproduct_id" not-null="true"/>
+			<one-to-many class="Bill_Of_Materials"/>
+		</set>
+	</class>
+</hibernate-mapping>
