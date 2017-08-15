@@ -12,8 +12,9 @@ public class Main {
      */
     public static void main(String[] args) {
         SQLiteDB db = new SQLiteDB();
-        db.insertProduct("!@#ghJ#$poui1", "Perfume", 42, 1, "resources/perfume.jpg", 666, 21.99);
+//        db.insertProduct("!@#ghJ#$poui1", "Perfume", 42, 1, "resources/perfume.jpg", 666, 21.99);
 //        db.readImage(2, "lipstick_from_db.jpg");
+        db.insertBillOfMaterials(250, "Mary Jane", 80008080, 1);
     }
     
 }

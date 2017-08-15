@@ -153,4 +153,34 @@ public class SQLiteDB {
             System.out.println(ex);
         }
     }
+    
+    /**
+     * Insert new record into Bill_Of_Materials table. Field 'datetime_added' is
+     * current time in GMT.
+     * @param amount_arrived
+     * @param delivered_by
+     * @param contact_number
+     * @param product_id 
+     */
+    public void insertBillOfMaterials(int amount_arrived, String delivered_by, 
+            int contact_number, int product_id) {
+        String sql = "INSERT INTO Bill_Of_Materials (amount_arrived, datetime_added, "
+                + "delivered_by, contact_number, "
+                + "product_id) VALUES (?, datetime('now'), ?, ?, ?)";
+        
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the values
+            pstmt.setInt(1, amount_arrived);
+            pstmt.setString(2, delivered_by);
+            pstmt.setInt(3, contact_number);
+            pstmt.setInt(4, product_id);
+
+            // Execute query
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 }
