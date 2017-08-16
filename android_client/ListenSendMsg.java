@@ -4,39 +4,48 @@ import android.os.AsyncTask;
 
 import java.io.IOException;
 
+import static com.example.student.android_client.MainActivity.worker;
+
 /**
  * Created by student on 17.16.8.
  */
 
-public class ListenSendMsg extends AsyncTask<Object, String, Object> {
+public class ListenSendMsg extends AsyncTask<BigPackage, String, Void> {
 
     @Override
-    protected Object doInBackground(Object...  obj) {
-        Object res=null;
+    protected Void doInBackground(BigPackage...  params) {
         try  {
             AmberClient client = null;
             try {
                 client = new AmberClient("192.168.8.122");
+                publishProgress("Connected");
             } catch (IOException e) {
+                publishProgress("not Connected");
                 e.printStackTrace();
             }
             Packet.objectpack pack=new Packet.objectpack();
-            pack.Mobject=obj[0];
-            client.sendObject(pack);
-            while(true){
-                if(client.clientListener.getNewMsg()){
-                    res=client.clientListener.obj;
-                    break;
+            Boolean myflag=true;
+            while(worker.proceed){
+                if(worker.flag){
+                    publishProgress("looped in");
+                    pack.Mobject=worker.sendablePackage;
+                    client.sendObject(pack);
+                    myflag=true;
+                    while(myflag){
+                        if(client.clientListener.getNewMsg()){
+                            worker.recivablePackage=client.clientListener.obj;
+                            myflag=false;
+                        }
+                    }
+                    worker.flag=false;
                 }
+
             }
-            publishProgress("closing client");
             client.closeConnection();
-            publishProgress("closed client");
         } catch (Exception e) {
-            res=e.toString();
             e.printStackTrace();
         }
-        return res;
+        return null;
      }
 
     @Override

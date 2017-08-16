@@ -31,7 +31,6 @@ public class AmberClient {
         kryo = client.getKryo();
         kryo.register(Packet.TextMessage.class);
         kryo.register(Packet.objectpack.class);
-        kryo.register(Object.class);
     }
 
     public void sendMessage(Packet.TextMessage textMessage) {
