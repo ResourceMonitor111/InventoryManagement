@@ -11,9 +11,8 @@ public class Packet {
         public String text;
     }
 
-    public static class sdfer {
-        public int id;
-        public String text;
+    public static class objectpack{
+        public Object Mobject;
     }
 
 

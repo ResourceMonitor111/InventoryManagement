@@ -10,10 +10,23 @@ import com.esotericsoftware.kryonet.Listener;
 
 public class ClientListener extends Listener {
 
+    private Boolean listen;
+    private Boolean newMsg;
+    private String Msg;
+    public Object obj;
+
+
+
+    public ClientListener(){
+        super();
+        setMsg("");
+        setNewMsg(false);
+        setListen(true);
+    }
 
     @Override
     public void connected(Connection cnctn) {
-        System.out.println("You are connected...");
+  //      MainActivity.WriteOnScreen("You are connected...");
     }
 
 
@@ -21,14 +34,47 @@ public class ClientListener extends Listener {
     @Override
     public void received(Connection cnctn, Object o) {
         if (o instanceof Packet.TextMessage) {
-            MainActivity.WriteOnScreen(((Packet.TextMessage) o).text);
-      //      System.out.println(((TextMessage) o).text);
+
+            if(((Packet.TextMessage) o).text.equals("finish")){
+                setListen(false);
+            }
+            setMsg(((Packet.TextMessage) o).text);
+            setNewMsg(true);
+        }else if(o instanceof Packet.objectpack){
+            this.obj=((Packet.objectpack) o).Mobject;
+            setNewMsg(true);
         }
     }
 
     @Override
     public void disconnected(Connection cnctn) {
         super.disconnected(cnctn); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Boolean getListen() {
+        return listen;
+    }
+
+    void setListen(Boolean listen) {
+        this.listen = listen;
+    }
+
+
+    public String getMsg() {
+        setNewMsg(false);
+        return Msg;
+    }
+
+    void setMsg(String msg) {
+        Msg = msg;
+    }
+
+    public Boolean getNewMsg() {
+        return newMsg;
+    }
+
+    void setNewMsg(Boolean newMsg) {
+        this.newMsg = newMsg;
     }
 
 }

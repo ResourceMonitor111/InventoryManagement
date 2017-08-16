@@ -4,11 +4,6 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
-
-import static com.example.student.android_client.MainActivity.WriteOnScreen;
 
 /**
  * Created by student on 17.15.8.
@@ -17,7 +12,7 @@ import static com.example.student.android_client.MainActivity.WriteOnScreen;
 public class AmberClient {
 
     private Client client;
-    private ClientListener clientListener;
+    public ClientListener clientListener;
     private Kryo kryo;
 
 
@@ -35,10 +30,16 @@ public class AmberClient {
     private void registerPackets() {
         kryo = client.getKryo();
         kryo.register(Packet.TextMessage.class);
+        kryo.register(Packet.objectpack.class);
+        kryo.register(Object.class);
     }
 
     public void sendMessage(Packet.TextMessage textMessage) {
         client.sendTCP(textMessage);
+    }
+
+    public void sendObject(Packet.objectpack obj){
+        client.sendTCP(obj);
     }
 
     public void closeConnection() {

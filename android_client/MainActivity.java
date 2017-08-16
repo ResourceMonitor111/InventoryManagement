@@ -1,24 +1,20 @@
 package com.example.student.android_client;
 
-import android.Manifest;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.LinearLayout;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
-import java.util.Scanner;
-
-
-import com.esotericsoftware.kryonet.Client;
-
-import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class MainActivity extends AppCompatActivity {
     public static TextView mytxt=null;
+    public static EditText myEditbox;
+
 
     public static void WriteOnScreen(String text){
         mytxt.setText(text);
@@ -28,74 +24,47 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         mytxt= (TextView) findViewById(R.id.thisid);
-
-
-        WriteOnScreen("Heyyo");
-
-        WriteOnScreen("Starting client...");
-
-
-
-        Thread thread = new Thread(new Runnable() {
-
+        WriteOnScreen("Hello");
+        myEditbox = (EditText) findViewById(R.id.inputbox);
+        myEditbox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void run() {
-                try  {
-                    if(isHostReachable("192.168.8.118",9999,10000)){
-                        WriteOnScreen("got ping");
-                        AmberClient client = null;
-                        try {
-                            client = new AmberClient("192.168.8.118");
-                            WriteOnScreen("Connected");
-                        } catch (IOException e) {
-                            WriteOnScreen(e.toString());
-                            e.printStackTrace();
-                        }
-                        Packet.TextMessage message = new Packet.TextMessage();
-                        Scanner scanner = new Scanner(System.in);
-                        while(true) {
-                            message.text = scanner.nextLine();
-                            if (message.text.equals("quit") || message.text.equals("exit")) {
-                                break;
-                            } else {
-                                client.sendMessage(message);
-                            }
-                        }
-                        scanner.close();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                boolean handled=false;
+                String text;
+                if(i== EditorInfo.IME_ACTION_DONE){
+                    text=textView.getText().toString();
+                    text=(String) SendNRecive(text);
+                    if(text==null||text.equals("")){ }
+                    else{ WriteOnScreen(text);}
+//                    WriteOnScreen(text);
                 }
+                return handled;
             }
         });
-        thread.start();
-
-
     }
 
-    public static boolean isHostReachable(String serverAddress, int serverTCPport, int timeoutMS){
-        boolean connected = false;
-        Socket socket;
+    static public Object SendNRecive(Object o){
+        ListenSendMsg tmp=new ListenSendMsg();
+        tmp.execute(o);
+        Object res=null;
+        WriteOnScreen("got in SendNRecive");
         try {
-            socket = new Socket();
-            SocketAddress socketAddress = new InetSocketAddress(serverAddress, serverTCPport);
-            WriteOnScreen("socket Address");
-            socket.connect(socketAddress, timeoutMS);
-            WriteOnScreen("connect");
-            if (socket.isConnected()) {
-                connected = true;
-                socket.close();
-            }
-        } catch (IOException e) {
+            WriteOnScreen("waiting for response");
+            res=tmp.get(5, TimeUnit.SECONDS);
+            WriteOnScreen("good");
+            if(res==null) WriteOnScreen("not so good");
+        } catch (InterruptedException e) {
+            WriteOnScreen("bad 1");
             e.printStackTrace();
-        } finally {
-            socket = null;
-
+        } catch (ExecutionException e) {
+            WriteOnScreen("bad 2");
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            WriteOnScreen("got time out");
+            e.printStackTrace();
         }
-        return connected;
+        return res;
     }
+
 }
