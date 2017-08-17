@@ -49,3 +49,5 @@ CREATE TABLE [product_transaction] (
     FOREIGN KEY(transaction_id) REFERENCES [transaction](transaction_id)
     ON DELETE CASCADE
 );
+
+PRAGMA foreign_keys = ON;
