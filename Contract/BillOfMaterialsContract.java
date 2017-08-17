@@ -7,17 +7,17 @@ public class BillOfMaterialsContract {
 
     public static final String CONTENT_AUTHORITY = "com.sudhirkhanger.app.inventoryapp";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
-    public static final String PATH_PRODUCT = "product";
+    public static final String PATH_BILLOFMATERIALS= "billofmaterials";
 
     public static final class BillOfMaterialsEntry implements BaseColumns {
 
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon()
-                .appendPath(PATH_PRODUCT).build();
+                .appendPath(PATH_BILLOFMATERIALS).build();
 
         public static final String CONTENT_DIR_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PRODUCT;
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_BILLOFMATERIALS;
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PRODUCT;
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_BILLOFMATERIALS;
 
         public static final String TABLE_NAME = "Bill_Of_Materials";
 
@@ -29,7 +29,7 @@ public class BillOfMaterialsContract {
         public static final String COLUMN_FK_PRODUCT_ID = "productId";
 
 
-        public static Uri buildProductUri(long id) {
+        public static Uri buildBillOfMaterialsUri(int id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
