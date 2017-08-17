@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public static TextView mytxt=null;
     public static EditText myEditbox;
     public static BigPackage worker;
+    public static String tmp;
 
     public static void WriteOnScreen(String text){
         mytxt.setText(text);
@@ -24,41 +25,44 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        String ip="192.168.8.122";
         mytxt= (TextView) findViewById(R.id.thisid);
         WriteOnScreen("Hello");
         myEditbox = (EditText) findViewById(R.id.inputbox);
         worker=new BigPackage();
-        new ListenSendMsg().execute(worker);
+        new ListenSendMsg().execute(ip);
         myEditbox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 boolean handled=false;
                 String text;
-                WriteOnScreen("try to request");
                 if(i== EditorInfo.IME_ACTION_DONE){
                     text=textView.getText().toString();
-                    WriteOnScreen("about to request");
-                    text=(String) SendNRecive(text);
-                    if(text==null||text.equals("")){ }
-                    else{ WriteOnScreen(text);}
-//                    WriteOnScreen(text);
+                    SendNRecive(text);
                 }
                 return handled;
             }
         });
     }
 
-    static public Object SendNRecive(Object o){
-        Object res=null;
+    static public void SendNRecive(Object o){
         worker.sendablePackage=o;
-        WriteOnScreen("sendNrecive");
         worker.flag=true;
-        WriteOnScreen("about to wait");
-        while(worker.flag){
-            WriteOnScreen("waiting answer");
-        }
-        res=worker.recivablePackage;
-        return res;
     }
 
+    static public void Recived(){
+        WriteOnScreen((String) worker.getReceivablePackage());
+    }
+
+    static public void NotConnectedError(){
+        WriteOnScreen("Not Connected");
+    }
+
+    static public void OtherError(){
+        WriteOnScreen("Something went wrong");
+     }
+
+     static public void message(){
+         WriteOnScreen(tmp);
+     }
 }

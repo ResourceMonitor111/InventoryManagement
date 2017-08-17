@@ -13,7 +13,7 @@ public class ClientListener extends Listener {
     private Boolean listen;
     private Boolean newMsg;
     private String Msg;
-    public Object obj;
+    private Object obj;
 
 
 
@@ -41,7 +41,7 @@ public class ClientListener extends Listener {
             setMsg(((Packet.TextMessage) o).text);
             setNewMsg(true);
         }else if(o instanceof Packet.objectpack){
-            this.obj=((Packet.objectpack) o).Mobject;
+            setObj(((Packet.objectpack) o).Mobject);
             setNewMsg(true);
         }
     }
@@ -63,6 +63,15 @@ public class ClientListener extends Listener {
     public String getMsg() {
         setNewMsg(false);
         return Msg;
+    }
+
+    public Object getObj() {
+        setNewMsg(false);
+        return obj;
+    }
+
+    public void setObj(Object obj) {
+        this.obj = obj;
     }
 
     void setMsg(String msg) {

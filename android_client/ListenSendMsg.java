@@ -10,47 +10,63 @@ import static com.example.student.android_client.MainActivity.worker;
  * Created by student on 17.16.8.
  */
 
-public class ListenSendMsg extends AsyncTask<BigPackage, String, Void> {
+public class ListenSendMsg extends AsyncTask<String, Integer, Void> {
 
     @Override
-    protected Void doInBackground(BigPackage...  params) {
+    protected Void doInBackground(String...  strings) {
+        AmberClient client = null;
+        Boolean connected=true;
         try  {
-            AmberClient client = null;
-            try {
-                client = new AmberClient("192.168.8.122");
-                publishProgress("Connected");
-            } catch (IOException e) {
-                publishProgress("not Connected");
-                e.printStackTrace();
+           try {
+                client = new AmberClient(strings[0]);
+            } catch (IOException e){
+               publishProgress(1);
+               e.printStackTrace();
+               connected=false;
+               cancel(true);
             }
             Packet.objectpack pack=new Packet.objectpack();
             Boolean myflag=true;
             while(worker.proceed){
+                if(isCancelled()) break;
                 if(worker.flag){
-                    publishProgress("looped in");
                     pack.Mobject=worker.sendablePackage;
                     client.sendObject(pack);
                     myflag=true;
+                    publishProgress(3);
                     while(myflag){
                         if(client.clientListener.getNewMsg()){
-                            worker.recivablePackage=client.clientListener.obj;
+                            worker.setReceivablePackage(client.clientListener.getObj());
                             myflag=false;
+
+                            publishProgress(0);
                         }
                     }
                     worker.flag=false;
                 }
-
             }
-            client.closeConnection();
         } catch (Exception e) {
+            publishProgress(2);
             e.printStackTrace();
+        }finally {
+            if(connected) client.closeConnection();
         }
         return null;
      }
 
     @Override
-    protected void onProgressUpdate(String... messages) {
-        MainActivity.WriteOnScreen(messages[0]);
+    protected void onProgressUpdate(Integer... ints) {
+        switch(ints[0]){
+            case(0):MainActivity.Recived();             //no errors
+                break;
+            case(1):MainActivity.NotConnectedError();   //did not connect to server
+                break;
+            case(2):MainActivity.OtherError();          //other error
+                break;
+            case(3):MainActivity.message();             //testing messages
+                break;
+        }
+
     }
 
 
