@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="R">
+
+  <uses-permission android:name="android.permission.CAMERA" />
+
+  <application
+      android:allowBackup="true" >
+
+      <activity android:name="main.GoTo_00_MainMenu"
+          android:theme="@style/AppTheme"
+          android:screenOrientation="portrait">
+          <intent-filter>
+              <action android:name="android.intent.action.MAIN" />
+              <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+      </activity>
+
+      <activity android:label="AddOrRemove"
+          android:name="main.GoTo_10_AddOrRemove"
+          android:theme="@style/AppOverlayTheme"
+          android:screenOrientation="portrait"
+          android:uiOptions="splitActionBarWhenNarrow">
+          <meta-data android:name="android.support.UI_OPTIONS"
+              android:value="splitActionBarWhenNarrow" />
+      </activity>
+
+       <activity android:label="BARCODE SCANNER"
+           android:name="main.GoTo_11_Scanner"
+           android:theme="@style/AppOverlayTheme"
+           android:screenOrientation="portrait"
+           android:uiOptions="splitActionBarWhenNarrow">
+           <meta-data android:name="android.support.UI_OPTIONS"
+               android:value="splitActionBarWhenNarrow" />
+       </activity>
+
+      <activity android:label="GoToAddOrRemovePutCount"
+          android:name="main.GoTo_12_AddOrRemovePutCount"
+          android:theme="@style/AppOverlayTheme"
+          android:screenOrientation="portrait"
+          android:uiOptions="splitActionBarWhenNarrow">
+          <meta-data android:name="android.support.UI_OPTIONS"
+              android:value="splitActionBarWhenNarrow" />
+      </activity>
+
+     <activity android:label="GoToEdit"
+          android:name="main.GoTo_41_Edit"
+          android:theme="@style/AppOverlayTheme"
+          android:screenOrientation="portrait"
+          android:uiOptions="splitActionBarWhenNarrow">
+          <meta-data android:name="android.support.UI_OPTIONS"
+              android:value="splitActionBarWhenNarrow" />
+      </activity>
+
+  </application>
+</manifest>
