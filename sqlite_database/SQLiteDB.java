@@ -16,7 +16,7 @@ import java.sql.Statement;
 
 /**
  * This class contains methods to query the serverless SQLite database
- * 
+ *
  * @author Peteris Caurs
  */
 public class SQLiteDB {
@@ -26,7 +26,7 @@ public class SQLiteDB {
      *
      * @return the Connection object
      */
-    public Connection connect() {
+    private Connection connect() {
         // Create an object that will represent the database
         Connection connection = null;
 
@@ -85,7 +85,6 @@ public class SQLiteDB {
             File file = new File(image);
             fos = new FileOutputStream(file);
 
-            System.out.println("Writing BLOB to file " + file.getAbsolutePath());
             while (rs.next()) {
                 InputStream input = rs.getBinaryStream("image");
                 byte[] buffer = new byte[1024];
@@ -157,14 +156,14 @@ public class SQLiteDB {
      */
     public void selectProducts() {
         String sql = "SELECT * FROM [product]";
-        
+
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
-            
+
             // loop through the result set
             while (rs.next()) {
-                System.out.println(rs.getInt("product_id") +  "\t" + 
+                System.out.println(rs.getInt("product_id") +  "\t" +
                                    rs.getString("barcode")  +  "\t" +
                                    rs.getString("product_name")  +  "\t" +
                                    rs.getInt("product_type")  +  "\t" +
@@ -179,12 +178,12 @@ public class SQLiteDB {
             System.out.println(e.getMessage());
         }
     }
-    
+
     /**
      * Check if a product with specified barcode at @param exists in the database
-     * 
+     *
      * @param barcode
-     * @return 
+     * @return
      */
     public boolean productExists(String barcode) {
         String sql = "SELECT barcode FROM [product] where barcode = ?";
@@ -195,17 +194,17 @@ public class SQLiteDB {
             pstmt.setString(1, barcode);
 
             ResultSet resultset = pstmt.executeQuery();
-            
+
             while (resultset.next()) {
                 if (resultset.getString("barcode") != null) {
                     return true;
                 }
             }
-            
+
             // Execute query
             pstmt.executeUpdate();
         } catch (SQLException ex) {}
-        
+
         return false;
     }
 }
