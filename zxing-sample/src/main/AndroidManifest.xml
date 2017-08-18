@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="me.dm7.barcodescanner.zxing.sample">
+
+  <uses-permission android:name="android.permission.CAMERA" />
+
+  <application
+      android:allowBackup="true">
+
+        <activity android:name="main.GoTo_00_MainMenu"
+          android:theme="@style/AppTheme">
+          <intent-filter>
+              <action android:name="android.intent.action.MAIN" />
+              <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+
+      <activity android:label="AddOrRemove"
+          android:name="main.GoTo_10_AddOrRemove"
+          android:theme="@style/AppOverlayTheme"
+          android:uiOptions="splitActionBarWhenNarrow">
+          <meta-data android:name="android.support.UI_OPTIONS"
+              android:value="splitActionBarWhenNarrow" />
+      </activity>
+
+        <activity android:label="Scanner"
+                  android:name="main.GoTo_11_Scanner"
+                  android:theme="@style/AppOverlayTheme"
+                  android:uiOptions="splitActionBarWhenNarrow">
+            <meta-data android:name="android.support.UI_OPTIONS"
+                       android:value="splitActionBarWhenNarrow" />
+        </activity>
+      <provider
+          android:name="model.ProductProvider"
+          android:authorities="com.sudhirkhanger.app.inventoryapp"/>
+
+      <activity android:label="GoToAddOrRemovePutCount"
+          android:name="main.GoTo_12_AddOrRemovePutCount"
+          android:theme="@style/AppOverlayTheme"
+          android:uiOptions="splitActionBarWhenNarrow">
+          <meta-data android:name="android.support.UI_OPTIONS"
+              android:value="splitActionBarWhenNarrow" />
+      </activity>
+  </application>
+</manifest>

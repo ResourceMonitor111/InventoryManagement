@@ -1,0 +1,60 @@
+apply from: 'dependencies.gradle'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        //compile 'com.j256.ormlite:ormlite-android:5.0'
+        //compile 'com.j256.ormlite:ormlite-core:5.0'
+    }
+}
+
+allprojects {
+    group = 'me.dm7.barcodescanner'
+    version = '1.9.7'
+
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://oss.sonatype.org/content/groups/public'
+        }
+    }
+
+    ext {
+        isLibrary = false
+        ormlite_version = "5.0"
+    }
+}
+
+subprojects {
+    afterEvaluate { Project project ->
+        ext.pluginContainer = project.getPlugins()
+        if(ext.pluginContainer.hasPlugin("com.android.application") || ext.pluginContainer.hasPlugin("com.android.library")) {
+            android {
+                compileSdkVersion versions.compile_sdk
+                buildToolsVersion versions.build_tools
+
+                android {
+                    lintOptions {
+                        abortOnError false
+                    }
+                }
+
+                defaultConfig {
+                    minSdkVersion versions.min_sdk
+                    targetSdkVersion versions.target_sdk
+                    versionCode 197
+                    versionName "1.9.7"
+                }
+            }
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4.1'
+}
