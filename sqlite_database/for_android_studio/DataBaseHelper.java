@@ -234,4 +234,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return product;
     }
+    
+    /**
+     * Checks if a product with specified barcode at @param exists in the database
+     * @param barcode
+     * @return
+     */
+    public boolean barcodeExists(String barcode) {
+        String selectQuery = "SELECT * FROM [product] where barcode = '" + barcode + "'";
+        Cursor cursor = myDataBase.rawQuery(selectQuery, null);
+        if (cursor.getCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Deletes a product from database by specified barcode at @param
+     * @param barcode
+     */
+    public void deleteProduct(String barcode) {
+        myDataBase.delete("[product]", "barcode = ?", new String[] {barcode});
+    }
 }
