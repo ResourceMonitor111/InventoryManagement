@@ -19,7 +19,7 @@ import java.util.List;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
-    private static String DB_PATH = "data/data/main/";
+    private static String DB_PATH = "data/data/me.dm7.barcodescanner.zxing.sample/";
 
 //    private static String DB_PATH = Context.getFilesDir().getPath();
     private static String DB_NAME = "scanerist_db.db";

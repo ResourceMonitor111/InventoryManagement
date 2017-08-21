@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.io.IOException;
+import java.util.List;
 
 import R.R;
 
@@ -20,37 +21,25 @@ public class GoTo_00_MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_00_main_menu);
-        buttonListeners();
 
-
+        System.out.println("-----------------> DATABASE STUFF STARTS HERE");
         DataBaseHelper a = new DataBaseHelper(this);
         try {
             a.createDataBase();
- //           a.openDataBase();
-//            a.close();
+            a.openDataBase();
+            a.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-////        List<Product> productList = a.getAllProducts();
-////        for (Product p: productList) {
-////            System.out.println(p.toString());
-////        }
-//
-////        a.openDataBase();
-////        Product c = new Product();
-////        Product b = new Product(0, "5000112618877", "Nestea", "Dzēriens", 0, null, null, 12.2, "description");
-////        c =a.getProduct(b.barcode);
-////
-////        if (c.getProduct_name()==null) {
-////            a.insertProduct(b);
-////            c =a.getProduct(b.barcode);
-////        }
-////
-////        editText_count.setText(""+c.getProduct_name());
-//
 
 
+
+
+
+
+
+        buttonListeners();
     }
 
     public static String getAction() {

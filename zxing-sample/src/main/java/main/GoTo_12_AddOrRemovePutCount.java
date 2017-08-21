@@ -78,8 +78,8 @@ public class GoTo_12_AddOrRemovePutCount extends AppCompatActivity {
         editText_count.setSelection(editText_count.getText().length());
 
 
-        DataBaseHelper a = new DataBaseHelper(this);
-        a.openDataBase();
+//        DataBaseHelper a = new DataBaseHelper(this);
+//        a.openDataBase();
 ////        List<Product> productList = a.getAllProducts();
 ////        for (Product p: productList) {
 ////            System.out.println(p.toString());
@@ -97,7 +97,7 @@ public class GoTo_12_AddOrRemovePutCount extends AppCompatActivity {
 ////
 ////        editText_count.setText(""+c.getProduct_name());
 //
-        a.close();
+//        a.close();
     }
 
 
