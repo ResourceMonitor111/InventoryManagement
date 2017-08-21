@@ -3,7 +3,6 @@ package model;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.security.Timestamp;
-import models.Product;
 
 
 @DatabaseTable
@@ -19,17 +18,17 @@ public class BillOfMaterialsORM {
     private String deliveredBy;
     @DatabaseField(canBeNull = false, unique = false, columnName = "contactNumber")
     private int contactNumber;
-    @DatabaseField(foreign = true, canBeNull = false, unique = false)
-    private Product product;
+    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, foreignColumnName = "productId")
+    private int productId;
 
     public BillOfMaterialsORM(int id,
                            int amountArrived,
                            String deliveredBy,
                            Timestamp datetimeAdded,
                            int contactNumber,
-                           Product product) {
+                              int productId) {
         this.id = id;
-        this.product = product;
+        this.productId = productId;
         this.contactNumber = contactNumber;
         this.amountArrived = amountArrived;
         this.deliveredBy = deliveredBy;
@@ -76,12 +75,12 @@ public class BillOfMaterialsORM {
         this.contactNumber = contactNumber;
     }
 
-    public Product getProduct() {
-        return product;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     @Override
@@ -92,7 +91,7 @@ public class BillOfMaterialsORM {
                 ", datetimeAdded='" + datetimeAdded + '\'' +
                 ", deliveredBy=" + deliveredBy +
                 ", contactNumber=" + contactNumber +
-                ", productId='" + product + '\'' +
+                ", productId='" + productId + '\'' +
                 '}';
     }
 }
