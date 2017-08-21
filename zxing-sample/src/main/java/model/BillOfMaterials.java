@@ -8,6 +8,10 @@ public class BillOfMaterials {
     private int contactNumber;
     private int productId;
 
+    public BillOfMaterials(){
+        //empty constructor, required by ORMLite
+    }
+
     public BillOfMaterials(int id,
                              int amountArrived,
                              String deliveredBy,

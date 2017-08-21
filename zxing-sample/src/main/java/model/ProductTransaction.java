@@ -15,6 +15,9 @@ public class ProductTransaction {
     @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, foreignColumnName = "transactionid")
     private int transactionid;
 
+    public ProductTransaction(){
+        //empty constructor, required by ORMLite
+    }
     public ProductTransaction(int soldAmount, int productid, int transactionid) {
         this.soldAmount = soldAmount;
         this.productid = productid;

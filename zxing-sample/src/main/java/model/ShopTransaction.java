@@ -17,6 +17,9 @@ public class ShopTransaction {
     @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, foreignColumnName = "Clerk_id")
     private int Clerk_id;
 
+    public ShopTransaction(){
+        //empty constructor, required by ORMLite
+    }
     public ShopTransaction(int transaction_id, Timestamp datetimeCreated, int Clerk_id){
         _transaction_id = transaction_id;
         this.datetimeCreated = datetimeCreated;

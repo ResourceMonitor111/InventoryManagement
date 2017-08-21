@@ -17,7 +17,7 @@ import com.j256.ormlite.stmt.QueryBuilder;
 
     public class RepoUsers {
 
-        Dao<Product, String> ProductDao = null;
+        Dao<Product, Integer> ProductDao = null;
 
         /*public Dao<Product, String> getProductDao() throws SQLException {
             if (ProductDao == null) {
@@ -69,9 +69,24 @@ import com.j256.ormlite.stmt.QueryBuilder;
         public Product getByProductname(String Productname)
         {
             try {
-                QueryBuilder<Product, String> qb = ProductDao.queryBuilder();
+                QueryBuilder<Product, Integer> qb = ProductDao.queryBuilder();
 
-                qb.where().eq("Productname", Productname);
+                qb.where().eq("name", Productname);
+
+                PreparedQuery<Product> pq = qb.prepare();
+                return ProductDao.queryForFirst(pq);
+            } catch (SQLException e) {
+                // TODO: Exception Handling
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        public Product getProductByBarcode(String barcode){
+            try {
+                QueryBuilder<Product, Integer> qb = ProductDao.queryBuilder();
+
+                qb.where().eq("barcode", barcode);
 
                 PreparedQuery<Product> pq = qb.prepare();
                 return ProductDao.queryForFirst(pq);

@@ -16,6 +16,9 @@ public class Clerk {
     @DatabaseField(canBeNull = true, unique = false, columnName = "email")
     private String email;
 
+    public Clerk(){
+        //empty constructor, required by ORMLite
+    }
     public Clerk(int Clerk_id, String firstname, String lastname, int contactNumber, String email) {
         this.Clerk_id = Clerk_id;
         this.firstname = firstname;

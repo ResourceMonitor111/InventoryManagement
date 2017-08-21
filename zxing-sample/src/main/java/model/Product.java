@@ -6,7 +6,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable
 public class Product {
     java.util.Date date;
-    @DatabaseField(generatedId = true, columnName = "teacher_id")
+    @DatabaseField(generatedId = true, columnName = "product_id")
     private int product_id;
     @DatabaseField(canBeNull = false, columnName = "barcode", unique = true)
     private String barcode;
@@ -25,7 +25,9 @@ public class Product {
     @DatabaseField(canBeNull = true,  columnName = "description")
     private String productDescription;
 
-
+    public Product(){
+        //empty constructor, required by ORMLite
+    }
     public Product(String barcode, String productName, String productType, int productAmount, double productPrice, String productImage, String productDescription) {
         this.barcode = barcode;
         this.productName = productName;

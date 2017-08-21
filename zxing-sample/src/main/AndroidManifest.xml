@@ -31,9 +31,6 @@
             <meta-data android:name="android.support.UI_OPTIONS"
                        android:value="splitActionBarWhenNarrow" />
         </activity>
-      <provider
-          android:name="model.ProductProvider"
-          android:authorities="com.sudhirkhanger.app.inventoryapp"/>
 
       <activity android:label="GoToAddOrRemovePutCount"
           android:name="main.GoTo_12_AddOrRemovePutCount"

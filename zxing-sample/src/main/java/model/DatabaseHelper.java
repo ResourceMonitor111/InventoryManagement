@@ -24,7 +24,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String DATABASE_NAME = "ScaneristDB_v3.db";
     private static final int DATABASE_VERSION = 1;
 
-    private Dao<Product, String> ProductDao = null;
+    private Dao<Product, Integer> ProductDao = null; //// or should I use primitive types? The second field is ID
 
 
     public DatabaseHelper(Context context) {
@@ -70,7 +70,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
 
-    public Dao<Product, String> getProductDao() throws SQLException {
+    public Dao<Product, Integer> getProductDao() throws SQLException { // or should I use primitive types? The second field is ID
         if (ProductDao == null) {
             ProductDao = DaoManager.createDao(getConnectionSource(), Product.class); // BaseDaoImpl was instead of DaoManager
             //BaseDaoImpl has a private createDao rather than public method
