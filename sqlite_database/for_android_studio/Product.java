@@ -9,17 +9,15 @@ import java.util.Arrays;
 public class Product {
 
     //private variables
-    int _id;
-    String barcode;
-    String product_name;
-    String product_type;
-    int amount;
-    byte[] image;
-    String datetime;
-    double price;
-
-
-    String description;
+    private int _id;
+    private String barcode;
+    private String product_name;
+    private String product_type;
+    private int amount;
+    private byte[] image;
+    private String datetime;
+    private double price;
+    private String description;
 
     /**
      * No-arg constructor
@@ -27,7 +25,7 @@ public class Product {
     public Product() {}
 
     /**
-     * Creates a new product
+     * Creates a new product. This constructor is used when data is recieved from database
      * @param _id
      * @param barcode
      * @param product_name
@@ -46,6 +44,26 @@ public class Product {
         this.amount = amount;
         this.image = image;
         this.datetime = datetime;
+        this.price = price;
+        this.description = description;
+    }
+
+    /**
+     * Creates a new product for inserting into database
+     * @param barcode
+     * @param product_name
+     * @param product_type
+     * @param amount
+     * @param image
+     * @param price
+     * @param description
+     */
+    public Product(String barcode, String product_name, String product_type, int amount, byte[] image, double price, String description) {
+        this.barcode = barcode;
+        this.product_name = product_name;
+        this.product_type = product_type;
+        this.amount = amount;
+        this.image = image;
         this.price = price;
         this.description = description;
     }
