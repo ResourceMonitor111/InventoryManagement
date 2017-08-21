@@ -257,4 +257,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void deleteProduct(String barcode) {
         myDataBase.delete("[product]", "barcode = ?", new String[] {barcode});
     }
+    
+    /**
+     * Updates a product name and type by specified barcode at @param
+     * @param barcode
+     */
+    public void updateProduct(String barcode, String productName, String productType) {
+        ContentValues values = new ContentValues();
+        values.put("product_name", productName);
+        values.put("product_type", productType);
+        myDataBase.update("[product]",values, "barcode = ?", new String[] {barcode});
+    }
 }
