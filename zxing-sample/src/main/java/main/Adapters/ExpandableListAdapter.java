@@ -36,6 +36,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
         return laptopCollections.get(laptops.get(groupPosition)).get(childPosition);
     }
 
+    public Object getParent(int groupPosition) {
+        return laptopCollections.get(laptops.get(groupPosition));
+    }
+
     public long getChildId(int groupPosition, int childPosition) {
         return childPosition;
     }

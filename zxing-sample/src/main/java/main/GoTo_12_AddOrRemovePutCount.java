@@ -10,14 +10,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import R.R;
 import sql.SQLiteDB;
+
 
 public class GoTo_12_AddOrRemovePutCount extends AppCompatActivity {
 
     private static TextView text_view;
-    private static EditText editText_name;
-    private static EditText editText_barCode;
+    private static TextView editText_name;
+    private static TextView editText_barCode;
     private static EditText editText_count;
 
     private static long barCode;
@@ -65,11 +67,37 @@ public class GoTo_12_AddOrRemovePutCount extends AppCompatActivity {
     }
 
     public void setValues(){
-        editText_name =(EditText)findViewById(R.id.editText_NAME);
-        editText_barCode =(EditText)findViewById(R.id.editText_BARCODE);
+        editText_name =(TextView)findViewById(R.id.editText_NAME);
+        editText_barCode =(TextView)findViewById(R.id.editText_BARCODE);
         editText_count =(EditText)findViewById(R.id.editText_COUNT);
+
         editText_name.setText(""+getName());
         editText_barCode.setText(GetResult.getCodeString());
+        setCount(1);
+        editText_count.setText(""+getCount());
+        editText_count.setSelection(editText_count.getText().length());
+
+
+        DataBaseHelper a = new DataBaseHelper(this);
+        a.openDataBase();
+////        List<Product> productList = a.getAllProducts();
+////        for (Product p: productList) {
+////            System.out.println(p.toString());
+////        }
+//
+////        a.openDataBase();
+////        Product c = new Product();
+////        Product b = new Product(0, "5000112618877", "Nestea", "Dzēriens", 0, null, null, 12.2, "description");
+////        c =a.getProduct(b.barcode);
+////
+////        if (c.getProduct_name()==null) {
+////            a.insertProduct(b);
+////            c =a.getProduct(b.barcode);
+////        }
+////
+////        editText_count.setText(""+c.getProduct_name());
+//
+        a.close();
     }
 
 

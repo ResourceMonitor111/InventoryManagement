@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import android.content.SharedPreferences;
-import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;

@@ -109,11 +109,14 @@ public class GoTo_10_AddOrRemove extends AppCompatActivity {
 
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                final String selected = (String) expListAdapter.getChild(
+                final String selectedItem = (String) expListAdapter.getChild(
                         groupPosition, childPosition);
 
-                GoTo_12_AddOrRemovePutCount.setName(selected);
+                final String selectedGroup = (String) expListAdapter.getGroup(
+                        groupPosition);
 
+                GoTo_12_AddOrRemovePutCount.setName(selectedItem);
+                GoTo_12_AddOrRemovePutCount.setGroup(selectedGroup);
 
                 if(GoTo_00_MainMenu.getAction().equals("Edit")){
                     Intent open = new Intent(v.getContext(), GoTo_41_Edit.class);
@@ -122,7 +125,9 @@ public class GoTo_10_AddOrRemove extends AppCompatActivity {
                     Intent open = new Intent(v.getContext(), GoTo_12_AddOrRemovePutCount.class);
                     startActivity(open);}
 
-                Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
+                Toast.makeText(getBaseContext(), selectedGroup, Toast.LENGTH_LONG)
+                        .show();
+                Toast.makeText(getBaseContext(), selectedItem, Toast.LENGTH_LONG)
                         .show();
 
                 return true;

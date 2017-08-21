@@ -26,7 +26,7 @@ public class GoTo_41_Edit extends AppCompatActivity {
     private static EditText edit_text_count; //EditText widget that WILL contain count of items for increase or decrease
     private static EditText edit_text_name; // EditText widget that WILL contain name of the item
     private static EditText edit_text_group; // EditText widget that WILL contain the description of the item
-    private static EditText edit_text_bar_code;// EditText widget that WILL contain the description of the item
+    private static TextView edit_text_bar_code;// EditText widget that WILL contain the description of the item
 
     private static Button button_EDIT_TO_DB; //Button that initiates field validation
 
@@ -53,13 +53,15 @@ public class GoTo_41_Edit extends AppCompatActivity {
     }
 
     public void setValues(){
-        edit_text_bar_code =(EditText)findViewById(R.id.editText_BARCODE);
+        edit_text_bar_code =(TextView)findViewById(R.id.editText_BARCODE);
         edit_text_group =(EditText)findViewById(R.id.editText_GROUP);
         edit_text_name =(EditText)findViewById(R.id.editText_NAME);
 
         edit_text_bar_code.setText(GetResult.getCodeString());
         edit_text_group.setText(""+GoTo_12_AddOrRemovePutCount.getGroup());
         edit_text_name.setText(""+GoTo_12_AddOrRemovePutCount.getName());
+
+        edit_text_name.setSelection(edit_text_name.getText().length());
 
         code_placeholder=GetResult.getCodeString();
         name_placeholder=GoTo_12_AddOrRemovePutCount.getName();
@@ -116,33 +118,30 @@ if(name_placeholder.equals("") && group_placeholder.equals("")){showNotification
     public boolean validatorForEdit(){ //VALIDATOR edit METHOD START
        edit_text_name = (EditText)findViewById(R.id.editText_NAME); //ASSIGN WIDGET TO VARIABLE. editText2 is name of the widget in design view or xml
         edit_text_group = (EditText)findViewById(R.id.editText_GROUP);//ASSIGN  WIDGET TO VARIABLE. editText3 is name of the widget in design view or xml
-        edit_text_bar_code = (EditText)findViewById(R.id.editText_BARCODE);////ASSIGN  WIDGET TO VARIABLE. editText4 is name of the widget in design view or xml
+        edit_text_bar_code = (TextView)findViewById(R.id.editText_BARCODE);////ASSIGN  WIDGET TO VARIABLE. editText4 is name of the widget in design view or xml
         button_EDIT_TO_DB = (Button)findViewById(R.id.button_EDIT_TO_DB);//ASSIGN VALUE FROM WIDGET TO VARIABLE. button is name of the widget in design view or xml
 
                if (edit_text_name.getText().toString().trim().length() < 3) {  //CHECK IF NAME WITHOUT SPACES IS ATLEAST 3 CHARACTERS
                    showErrorMessage( "[" + edit_text_name.getText() + "] is not a valid name!"); //IF LESS THAN 3, MESSAGE POPUP
                } else {
-
                    if (edit_text_group.getText().toString().trim().length() < 3) {//CURRENTLY UNKNOWN REQUIREMENTS FOR DESCRIPTION FIELD. PLACEHOLDER FOR FUTURE
                        showErrorMessage( "[" + edit_text_group.getText() + "] is not a valid description!");//IF X, MESSAGE POPUP
                    } else {
-                       try {
-                           if ((edit_text_bar_code.getText().toString().length()) == 13) { //IF BARCODE IS 13 CHARACTERS LONG
-                               long barCode = Long.parseLong(edit_text_bar_code.getText().toString());//TRY TO ASSIGN IT AS LONG TYPE TO "barCode" variable, IF FAILS - CATCH
-
-                           return true;
-
-                           } else {
-                               if (edit_text_bar_code.getText().toString().length() > 13) {//ELSE IF LONGER THAN 13
-                                   showErrorMessage( "[" + edit_text_bar_code.getText() + "] is not a valid BarCode! Too long!");//MESSAGE POPUP
-                               }
-                               if (edit_text_bar_code.getText().toString().length() < 13)//ELSE IF SHORTER THAN 13
-                                   showErrorMessage( "[" + edit_text_bar_code.getText() + "] is not a valid BarCode! Too short!");//MESSAGE POPUP
-                           }
-
-                       } catch (NumberFormatException e) {//CATCH PARSING EXCEPTION
-                           showErrorMessage( "[" + edit_text_bar_code.getText() + "] is not a valid BarCode!");//MESSAGE POPUP ABOUT BAD TYPE
-                       }
+//                       try {
+//                           if ((edit_text_bar_code.getText().toString().length()) == 13) { //IF BARCODE IS 13 CHARACTERS LONG
+//                               long barCode = Long.parseLong(edit_text_bar_code.getText().toString());//TRY TO ASSIGN IT AS LONG TYPE TO "barCode" variable, IF FAILS - CATCH
+                                 return true;
+//                           } else {
+//                               if (edit_text_bar_code.getText().toString().length() > 13) {//ELSE IF LONGER THAN 13
+//                                   showErrorMessage( "[" + edit_text_bar_code.getText() + "] is not a valid BarCode! Too long!");//MESSAGE POPUP
+//                               }
+//                               if (edit_text_bar_code.getText().toString().length() < 13)//ELSE IF SHORTER THAN 13
+//                                   showErrorMessage( "[" + edit_text_bar_code.getText() + "] is not a valid BarCode! Too short!");//MESSAGE POPUP
+//                           }
+//
+//                       } catch (NumberFormatException e) {//CATCH PARSING EXCEPTION
+//                           showErrorMessage( "[" + edit_text_bar_code.getText() + "] is not a valid BarCode!");//MESSAGE POPUP ABOUT BAD TYPE
+//                       }
                    }
               }
         return false;

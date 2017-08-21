@@ -26,32 +26,32 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/editText_BARCODE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="169dp"
+        android:layout_height="36dp"
         android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        android:layout_marginTop="139dp"
+        android:layout_marginRight="93dp"
+        android:layout_marginTop="147dp"
         android:ems="10"
         android:focusable="false"
+        android:textStyle="bold"
         android:inputType="number"
         android:maxLength="13"
         android:text=""
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/editText_NAME"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="33dp"
         android:layout_marginEnd="28dp"
-        android:layout_marginRight="44dp"
-
-        android:layout_marginTop="202dp"
+        android:layout_marginRight="91dp"
+        android:layout_marginTop="193dp"
         android:ems="10"
-
         android:focusable="false"
+        android:textStyle="bold"
         android:inputType="textPersonName"
         android:maxLength="25"
         android:text=""
@@ -63,11 +63,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:textStyle="bold"
         android:inputType="number"
         android:text=""
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="275dp"
-        android:layout_marginRight="44dp"
+        android:layout_marginTop="244dp"
+        android:layout_marginRight="48dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginEnd="28dp" />
 
@@ -92,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="36dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="223dp"
+        android:layout_marginTop="193dp"
         android:text="@string/text_product_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18sp"
@@ -104,9 +105,9 @@
         android:id="@+id/textView_COUNT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="36dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="296dp"
+        android:layout_marginTop="244dp"
         android:layout_weight="0.59"
         android:text="@string/text_product_count"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
