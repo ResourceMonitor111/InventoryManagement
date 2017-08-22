@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by metl on 18.08.2017.
+ * Created by Peteris Caurs on 18.08.2017.
  */
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -266,6 +266,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("product_name", productName);
         values.put("product_type", productType);
+        myDataBase.update("[product]",values, "barcode = ?", new String[] {barcode});
+    }
+    
+    /**
+     * Increases amount of a product
+     * @param barcode
+     * @param amount
+     */
+    public void increaseProductAmount(String barcode, int amount) {
+        Product product = getProduct(barcode);
+        int result = product.getAmount() + amount;
+        ContentValues values = new ContentValues();
+        values.put("amount", result);
+        myDataBase.update("[product]",values, "barcode = ?", new String[] {barcode});
+    }
+
+    /**
+     * Decreases amount of a product
+     * @param barcode
+     * @param amount
+     */
+    public void decreaseProductAmount(String barcode, int amount) {
+        Product product = getProduct(barcode);
+        int result = product.getAmount() - amount;
+        ContentValues values = new ContentValues();
+        values.put("amount", result);
         myDataBase.update("[product]",values, "barcode = ?", new String[] {barcode});
     }
 }
