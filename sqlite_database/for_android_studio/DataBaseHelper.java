@@ -294,4 +294,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put("amount", result);
         myDataBase.update("[product]",values, "barcode = ?", new String[] {barcode});
     }
+    
+    /**
+     * Returns the number of products of certain type
+     * @param product_type
+     * @return
+     */
+    public int getNumberOfProductType(String product_type) {
+        String selectQuery = "SELECT * FROM [product] where product_type = '" + product_type + "'";
+        Cursor cursor = myDataBase.rawQuery(selectQuery, null);
+        return cursor.getCount();
+    }
 }
