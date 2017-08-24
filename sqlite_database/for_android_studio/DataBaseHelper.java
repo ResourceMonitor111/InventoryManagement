@@ -305,4 +305,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = myDataBase.rawQuery(selectQuery, null);
         return cursor.getCount();
     }
+    
+    /**
+     * Returns the sum amount of products of certain type
+     * @param product_type
+     * @return
+     */
+    public int getSumAmountOfProductType(String product_type) {
+        String selectQuery = "SELECT SUM(amount) FROM [product] where product_type = '" + product_type + "'";
+        Cursor cursor = myDataBase.rawQuery(selectQuery, null);
+        if(cursor.moveToFirst()) {
+            return cursor.getInt(0);
+        } else {
+            return -1;
+        }
+    }
 }
