@@ -1,2 +1,10 @@
-# Scanerist aka I.T.E.M.S.C.A.N.
-An app that helps people detect and track items as they arrive and get sold.
+SCANNERIST
+===========
+
+Scannerist is an Android application for Inventory and product barcode scanning purposes. It serves as inventory manamegent system. 
+It uses smartphone camera as a scanner and stores data and accesses database. 
+Minimum Android version required is 5.0.
+
+Scannerist - это Android приложение, предназначенное для инвенторизации и сканирования штрих-кодов товаров. Выполняет задачи управления инвентарём.
+Приложение использует камеру смартфона в качестве сканнера, а так же хранит данные и имеет доступ к базе данных.
+Минимальная необходимая версия Andriod - 5.0.
